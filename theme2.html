@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Support Depot - Complete Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #007BFF;
+            --secondary-teal: #00C2A8;
+            --dark-accent: #0A2A43;
+            --light-bg: #F8FAFC;
+            --white: #FFFFFF;
+            --border-light: #E0E9F2;
+            --text-dark: #1A3A4E;
+            --text-muted: #64748b;
+        }
+
+        body {
+            /* make body transparent so the full-page video shows through */
+            background-color: transparent;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--dark-accent) 0%, #0f4c6a 100%);
+            color: var(--white);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 16px rgba(10, 42, 67, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--secondary-teal);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-teal);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Ensure nav underline uses secondary teal */
+        nav a::after { background-color: var(--secondary-teal); }
+
+        /* Search Box Styles */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 0.7rem 1.4rem;
+            transition: all 0.3s ease;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-box:hover,
+        .search-box:focus-within {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-color: var(--secondary-teal);
+            box-shadow: 0 4px 12px rgba(0, 194, 168, 0.2);
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--secondary-teal);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box button:hover {
+            color: var(--white);
+        }
+
+        .search-input {
+            background: transparent !important;
+            border: none !important;
+            color: var(--white);
+            padding: 0;
+            font-size: 0.95rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.25);
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 194, 168, 0.35);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-accent) 0%, #0f4c6a 50%, var(--primary-blue) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .bg-video-hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.40;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,42,67,0.30) 0%, rgba(15,76,106,0.40) 50%, rgba(0,123,255,0.35) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 194, 168, 0.15) 0%, rgba(0, 194, 168, 0) 70%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -8%;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--white);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Marketplace Section */
+        .marketplace {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-teal));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--white);
+        }
+
+        /* Service Cards Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+
+
+        /* Full-page global video + overlay */
+        .bg-video-global {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75; /* increased for better visibility */
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .video-overlay-global {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,42,67,0.10), rgba(10,42,67,0.18));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Ensure main site sections sit above the video+overlay */
+        header, .hero, .marketplace, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Make cards slightly translucent so video shows through without changing layout */
+        .service-card {
+            background: rgba(255,255,255,0.90);
+            backdrop-filter: blur(4px);
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(10, 42, 67, 0.08);
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+            will-change: transform;
+            transform: translateY(0);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            z-index: 1;
+            pointer-events: auto;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .service-card:hover,
+        .service-card:focus-within {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 123, 255, 0.15), 0 8px 24px rgba(0, 194, 168, 0.2);
+            border-left-color: var(--secondary-teal);
+            z-index: 10;
+        }
+
+        .service-card:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.6rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        .card-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .card-body {
+            padding: 1.8rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, rgba(10, 42, 67, 0.05) 0%, rgba(0, 194, 168, 0.08) 100%);
+            border-radius: 0 0 8px 8px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .card-description {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            flex-grow: 1;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hide feature list */
+        .card-features {
+            display: none;
+        }
+
+        .card-features ul {
+            list-style: none;
+        }
+
+        .card-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-features li:last-child {
+            border-bottom: none;
+        }
+
+        .card-features li i {
+            color: var(--primary-green);
+            margin-right: 0.5rem;
+        }
+
+        .card-footer {
+            padding: 1.2rem 1.5rem;
+            margin-top: auto;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(90deg, rgba(0, 194, 168, 0.1), rgba(10, 42, 67, 0.08));
+            border-top: 1px solid rgba(0, 194, 168, 0.15);
+            box-shadow: inset 0 1px 4px rgba(0, 194, 168, 0.08);
+        }
+
+        .card-button {
+            display: block;
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
+        }
+
+        .card-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 194, 168, 0.35);
+            background: linear-gradient(135deg, #0066cc 0%, #00a896 100%);
+            color: var(--white);
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .category-tab {
+            padding: 0.7rem 1.4rem;
+            background: var(--white);
+            border: 1.5px solid var(--border-light);
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-size: 0.95rem;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            color: var(--white);
+            border-color: var(--primary-blue);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.25);
+        }
+
+        .category-tab:not(.active):hover {
+            background: var(--light-bg);
+            border-color: var(--primary-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-accent) 0%, #0f4c6a 100%);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            border-radius: 2px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary-teal);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.12);
+            color: var(--white);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Full-page background video -->
+    <video class="bg-video-global" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="../bg1-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay-global" aria-hidden="true"></div>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-text">
+                    <h1>IT Support Depot</h1>
+                    <p>Providing MSP Companies a Phenomenal IT Support</p>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#" class="active">Marketplace</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search services..." class="search-input">
+                <button type="button"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <a href="#" class="cta-button">Account</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="bg-video-hero" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="../bg-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+            <h1>IT Services Marketplace</h1>
+            <p>Discover our comprehensive range of IT solutions and services designed to empower your business</p>
+        </div>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section class="marketplace">
+        <div class="section-title">
+            <h2>Our IT Services</h2>
+            <p>Choose from our carefully curated IT solutions</p>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="category-tab active" data-category="all">All Services</button>
+            <button class="category-tab" data-category="cloud">Cloud Solutions</button>
+            <button class="category-tab" data-category="security">Security</button>
+            <button class="category-tab" data-category="support">Support</button>
+            <button class="category-tab" data-category="backup">Backup & Recovery</button>
+            <button class="category-tab" data-category="microsoft">Microsoft Solutions</button>
+            <button class="category-tab" data-category="mobile">Mobile</button>
+            <button class="category-tab" data-category="training">Training</button>
+        </div>
+        
+        <!-- Services Grid -->
+        <div class="services-grid">
+            <!-- Cloud App Hosting -->
+            <div class="service-card fade-in" data-category="cloud">
+                <div class="card-header">
+                    <i class="fas fa-cloud card-icon"></i>
+                    <h3>Cloud App Hosting</h3>
+                    <div class="card-price">$250/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Cloud hosting is a type of web hosting that provides superior server uptime and performance for high-traffic websites.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> High availability</li>
+                            <li><i class="fas fa-check"></i> Scalable resources</li>
+                            <li><i class="fas fa-check"></i> 24/7 monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- CaaS -->
+            <div class="service-card fade-in delay-1" data-category="cloud">
+                <div class="card-header">
+                    <i class="fas fa-server card-icon"></i>
+                    <h3>CaaS</h3>
+                    <div class="card-price">$1399/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Containers as a Service (CaaS) is a cloud-based service that hosts and manages containerized applications.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Container management</li>
+                            <li><i class="fas fa-check"></i> Application hosting</li>
+                            <li><i class="fas fa-check"></i> Infrastructure management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Helpdesk Support -->
+            <div class="service-card fade-in delay-2" data-category="support">
+                <div class="card-header">
+                    <i class="fas fa-headset card-icon"></i>
+                    <h3>Helpdesk Support (Extended hours)</h3>
+                    <div class="card-price">$250/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Help desks are support teams that help customers and employees with technical issues and provide specialized support.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Extended hours</li>
+                            <li><i class="fas fa-check"></i> Multi-channel support</li>
+                            <li><i class="fas fa-check"></i> Expert technicians</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Cybersecurity Consulting -->
+            <div class="service-card fade-in delay-3" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-shield-alt card-icon"></i>
+                    <h3>Cybersecurity Consulting</h3>
+                    <div class="card-price">$199/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Cybersecurity consulting involves helping organizations identify, assess, and mitigate cybersecurity risks.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Risk assessment</li>
+                            <li><i class="fas fa-check"></i> Security strategy</li>
+                            <li><i class="fas fa-check"></i> Compliance guidance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Mobile Standard Security -->
+            <div class="service-card fade-in" data-category="mobile">
+                <div class="card-header">
+                    <i class="fas fa-mobile-alt card-icon"></i>
+                    <h3>Mobile Standard Security</h3>
+                    <div class="card-price">$25/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Mobile standard security refers to security protocols and practices used to protect mobile devices from cyber threats.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Threat protection</li>
+                            <li><i class="fas fa-check"></i> Data encryption</li>
+                            <li><i class="fas fa-check"></i> Privacy controls</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Mobile Device Management (Ipads) -->
+            <div class="service-card fade-in delay-1" data-category="mobile">
+                <div class="card-header">
+                    <i class="fas fa-tablet-alt card-icon"></i>
+                    <h3>Mobile Device Management (Ipads)</h3>
+                    <div class="card-price">$25/User/Monthly</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Mobile Device Management (MDM) is a software solution that allows IT teams to remotely control, secure, and manage mobile devices.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Remote control</li>
+                            <li><i class="fas fa-check"></i> Device security</li>
+                            <li><i class="fas fa-check"></i> Policy enforcement</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Mobile Premium Security -->
+            <div class="service-card fade-in delay-2" data-category="mobile">
+                <div class="card-header">
+                    <i class="fas fa-shield-virus card-icon"></i>
+                    <h3>Mobile Premium Security</h3>
+                    <div class="card-price">$45/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Mobile Premium security refers to advanced security protocols and practices with premium features to protect mobile devices.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Advanced threat protection</li>
+                            <li><i class="fas fa-check"></i> Premium data encryption</li>
+                            <li><i class="fas fa-check"></i> Enhanced privacy controls</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- HIPAA IT Compliance Documentation Service -->
+            <div class="service-card fade-in delay-3" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-file-medical card-icon"></i>
+                    <h3>HIPAA IT Compliance Documentation</h3>
+                    <div class="card-price">$2499</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">A service provider specializing in HIPAA IT compliance documentation can help organizations understand their specific documentation requirements.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Compliance documentation</li>
+                            <li><i class="fas fa-check"></i> Policy implementation</li>
+                            <li><i class="fas fa-check"></i> Record maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Microsoft 365 Business Basic -->
+            <div class="service-card fade-in" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fab fa-microsoft card-icon"></i>
+                    <h3>Microsoft 365 Business Basic</h3>
+                    <div class="card-price">$11.74/User/Monthly</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Benefit from identity, access, and user management for up to 300 employees with web and mobile versions of Office apps.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Web & mobile Office apps</li>
+                            <li><i class="fas fa-check"></i> Custom business email</li>
+                            <li><i class="fas fa-check"></i> 1TB OneDrive storage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Microsoft Office Suite Subscription for Business -->
+            <div class="service-card fade-in delay-1" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-file-word card-icon"></i>
+                    <h3>Microsoft Office Suite for Business</h3>
+                    <div class="card-price">$9.90/User/Monthly</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Install apps on up to five PCs, five tablets, and five mobile devices with FastTrack assistance and AI chat experience.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Multi-device installation</li>
+                            <li><i class="fas fa-check"></i> FastTrack assistance</li>
+                            <li><i class="fas fa-check"></i> AI chat experience</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Microsoft Entra ID P2 -->
+            <div class="service-card fade-in delay-2" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-user-shield card-icon"></i>
+                    <h3>Microsoft Entra ID P2</h3>
+                    <div class="card-price">$16/Monthly</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">A premium tier of Microsoft Entra ID offering enhanced identity and access management capabilities beyond Free and P1 tiers.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Enhanced identity management</li>
+                            <li><i class="fas fa-check"></i> Advanced access controls</li>
+                            <li><i class="fas fa-check"></i> Premium security features</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- IT Support Depot 48P Business Class Ethernet Switch -->
+            <div class="service-card fade-in delay-3" data-category="support">
+                <div class="card-header">
+                    <i class="fas fa-network-wired card-icon"></i>
+                    <h3>48P Business Class Ethernet Switch</h3>
+                    <div class="card-price">$65/Monthly</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">High-performance, smart-managed Layer 2+ gigabit Ethernet switch designed for small and medium businesses.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 48 ports</li>
+                            <li><i class="fas fa-check"></i> Smart management</li>
+                            <li><i class="fas fa-check"></i> High performance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- IaaS Firewall -->
+            <div class="service-card fade-in" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-fire card-icon"></i>
+                    <h3>IaaS Firewall</h3>
+                    <div class="card-price">$120/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">IaaS, or Infrastructure as a Service, is a cloud computing model that provides on-demand access to computing resources.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> On-demand resources</li>
+                            <li><i class="fas fa-check"></i> Cloud computing</li>
+                            <li><i class="fas fa-check"></i> Infrastructure management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Cyber Security Essentials -->
+            <div class="service-card fade-in delay-1" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-user-secret card-icon"></i>
+                    <h3>Cyber Security Essentials</h3>
+                    <div class="card-price">$25/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Advanced cybersecurity goes beyond basic defenses and uses cutting-edge technologies to identify and respond to cyber threats.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Advanced threat detection</li>
+                            <li><i class="fas fa-check"></i> Behavioral analytics</li>
+                            <li><i class="fas fa-check"></i> Threat intelligence</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Password Manager -->
+            <div class="service-card fade-in delay-2" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-key card-icon"></i>
+                    <h3>Password Manager</h3>
+                    <div class="card-price">$9/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">A password manager is an app that stores your passwords, so you don't need to remember them.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Secure storage</li>
+                            <li><i class="fas fa-check"></i> Auto-fill</li>
+                            <li><i class="fas fa-check"></i> Cross-platform</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Backup and Disaster Recovery (Server) -->
+            <div class="service-card fade-in delay-3" data-category="backup">
+                <div class="card-header">
+                    <i class="fas fa-database card-icon"></i>
+                    <h3>Backup and Disaster Recovery (Server)</h3>
+                    <div class="card-price">$95/Server/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Backup and recovery involves creating duplicate copies of critical data to restore it when needed, protecting against data loss.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Data backup</li>
+                            <li><i class="fas fa-check"></i> Disaster recovery</li>
+                            <li><i class="fas fa-check"></i> Data protection</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Email Security (Spam, Phishing and SAT) -->
+            <div class="service-card fade-in" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-envelope-shield card-icon"></i>
+                    <h3>Email Security (Spam, Phishing and SAT)</h3>
+                    <div class="card-price">$9/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Email security encompasses various measures, including spam and phishing protection, and security awareness training.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Spam protection</li>
+                            <li><i class="fas fa-check"></i> Phishing protection</li>
+                            <li><i class="fas fa-check"></i> Security training</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- 4 Weeks MSP Power Training -->
+            <div class="service-card fade-in delay-1" data-category="training">
+                <div class="card-header">
+                    <i class="fas fa-graduation-cap card-icon"></i>
+                    <h3>4 Weeks MSP Power Training</h3>
+                    <div class="card-price">$199/Weekly</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">IT Managed Service Provider (MSP) power training refers to comprehensive training programs designed to enhance skills of MSP professionals.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Technical skills</li>
+                            <li><i class="fas fa-check"></i> Business skills</li>
+                            <li><i class="fas fa-check"></i> Customer service</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Cybersecurity Premium Bundle -->
+            <div class="service-card fade-in delay-2" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-shield-check card-icon"></i>
+                    <h3>Cybersecurity Premium Bundle</h3>
+                    <div class="card-price">$45/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Cybersecurity Premium Bundle includes Security Awareness training, EDR+MDR, SIEM, ITDR etc.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Security awareness training</li>
+                            <li><i class="fas fa-check"></i> EDR+MDR</li>
+                            <li><i class="fas fa-check"></i> SIEM & ITDR</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- DMARC -->
+            <div class="service-card fade-in delay-3" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-mail-bulk card-icon"></i>
+                    <h3>DMARC</h3>
+                    <div class="card-price">$150/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">DMARC (Domain-based Message Authentication, Reporting, and Conformance) is an email authentication protocol.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Email authentication</li>
+                            <li><i class="fas fa-check"></i> Spoofing protection</li>
+                            <li><i class="fas fa-check"></i> Phishing prevention</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Microsoft 365 Business Standard -->
+            <div class="service-card fade-in" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fab fa-microsoft card-icon"></i>
+                    <h3>Microsoft 365 Business Standard</h3>
+                    <div class="card-price">$16.95/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">All things on Basic Plan plus around-the-clock phone and web support from Microsoft and AI chat experience.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 24/7 support</li>
+                            <li><i class="fas fa-check"></i> AI chat experience</li>
+                            <li><i class="fas fa-check"></i> Microsoft 365 Copilot</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Office 365 E3 -->
+            <div class="service-card fade-in delay-1" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-building card-icon"></i>
+                    <h3>Office 365 E3</h3>
+                    <div class="card-price">$29.55/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Office 365 E3 is a cloud-based suite of productivity apps and services with information protection and compliance capabilities.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Productivity apps</li>
+                            <li><i class="fas fa-check"></i> Information protection</li>
+                            <li><i class="fas fa-check"></i> Compliance capabilities</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Microsoft 365 Exchange Online -->
+            <div class="service-card fade-in delay-2" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-exchange-alt card-icon"></i>
+                    <h3>Microsoft 365 Exchange Online</h3>
+                    <div class="card-price">$8.20/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Microsoft 365 Exchange Online is a cloud-based email and calendaring service with advanced security and integration.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Cloud-based email</li>
+                            <li><i class="fas fa-check"></i> Advanced security</li>
+                            <li><i class="fas fa-check"></i> Application integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Advanced Email Encryption -->
+            <div class="service-card fade-in delay-3" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-lock card-icon"></i>
+                    <h3>Advanced Email Encryption</h3>
+                    <div class="card-price">$9.95/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Email encryption scrambles the contents of an email message so that only the intended recipient can read it.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Message encryption</li>
+                            <li><i class="fas fa-check"></i> Secure communication</li>
+                            <li><i class="fas fa-check"></i> Data protection</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Secured Remote Access -->
+            <div class="service-card fade-in" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-desktop card-icon"></i>
+                    <h3>Secured Remote Access</h3>
+                    <div class="card-price">$9/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Secure remote access is a combination of policies, technologies, and security measures that protect a company's network.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Network protection</li>
+                            <li><i class="fas fa-check"></i> Authorized access</li>
+                            <li><i class="fas fa-check"></i> Data security</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Secured Remote Access (Yearly Plan) -->
+            <div class="service-card fade-in delay-1" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-laptop-house card-icon"></i>
+                    <h3>Secured Remote Access (Yearly)</h3>
+                    <div class="card-price">$120/User/Year</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Secure remote access is a combination of policies, technologies, and security measures that protect a company's network.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Annual subscription</li>
+                            <li><i class="fas fa-check"></i> Network protection</li>
+                            <li><i class="fas fa-check"></i> Data security</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- SQL Server Standard -->
+            <div class="service-card fade-in delay-2" data-category="support">
+                <div class="card-header">
+                    <i class="fas fa-database card-icon"></i>
+                    <h3>SQL Server Standard</h3>
+                    <div class="card-price">$50/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">SQL Server Standard edition delivers basic data management and business intelligence database for departments and small organizations.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Data management</li>
+                            <li><i class="fas fa-check"></i> Business intelligence</li>
+                            <li><i class="fas fa-check"></i> Database management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Email Backup -->
+            <div class="service-card fade-in delay-3" data-category="backup">
+                <div class="card-header">
+                    <i class="fas fa-envelope-open-text card-icon"></i>
+                    <h3>Email Backup</h3>
+                    <div class="card-price">$9/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">ArcTitan is a cloud-based email archiving solution designed to help organizations manage and archive emails securely and efficiently.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Email archiving</li>
+                            <li><i class="fas fa-check"></i> Secure management</li>
+                            <li><i class="fas fa-check"></i> Efficient storage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Cloud Identity + MFA -->
+            <div class="service-card fade-in" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-id-card card-icon"></i>
+                    <h3>Cloud Identity + MFA</h3>
+                    <div class="card-price">$16/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Cloud Identity with Multi-Factor Authentication (MFA) combines cloud-based identity management with enhanced security.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Identity management</li>
+                            <li><i class="fas fa-check"></i> Multi-factor authentication</li>
+                            <li><i class="fas fa-check"></i> Enhanced security</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- MSP Empowerment Membership -->
+            <div class="service-card fade-in delay-1" data-category="training">
+                <div class="card-header">
+                    <i class="fas fa-users card-icon"></i>
+                    <h3>MSP Empowerment Membership</h3>
+                    <div class="card-price">$199/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">MSP Empowerment refers to programs designed to help Managed Service Providers grow their businesses and achieve greater success.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Business growth</li>
+                            <li><i class="fas fa-check"></i> Educational resources</li>
+                            <li><i class="fas fa-check"></i> Networking opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Phenomenal Helpdesk Support -->
+            <div class="service-card fade-in delay-2" data-category="support">
+                <div class="card-header">
+                    <i class="fas fa-hands-helping card-icon"></i>
+                    <h3>Phenomenal Helpdesk Support</h3>
+                    <div class="card-price">$68/PC/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">A high-quality IT support service characterized by exceptional performance, reliability, and ability to meet customer expectations.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> High-quality support</li>
+                            <li><i class="fas fa-check"></i> Exceptional performance</li>
+                            <li><i class="fas fa-check"></i> Customer satisfaction</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Email Exchange Online (Plan 1) -->
+            <div class="service-card fade-in delay-3" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-inbox card-icon"></i>
+                    <h3>Email Exchange Online (Plan 1)</h3>
+                    <div class="card-price">$8.2/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Microsoft Exchange Online is a hosted messaging solution that delivers email, calendar, contacts, and tasks from various devices.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Hosted messaging</li>
+                            <li><i class="fas fa-check"></i> Multi-device access</li>
+                            <li><i class="fas fa-check"></i> Microsoft Entra integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Exchange Online (Plan 2) -->
+            <div class="service-card fade-in" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-mail-bulk card-icon"></i>
+                    <h3>Exchange Online (Plan 2)</h3>
+                    <div class="card-price">$10.6/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Exchange Online Plan 2 provides users with a 100 GB mailbox and unlimited archive storage with more security tools.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 100 GB mailbox</li>
+                            <li><i class="fas fa-check"></i> Unlimited archive</li>
+                            <li><i class="fas fa-check"></i> Enhanced security</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Power Automate -->
+            <div class="service-card fade-in delay-1" data-category="microsoft">
+                <div class="card-header">
+                    <i class="fas fa-bolt card-icon"></i>
+                    <h3>Power Automate</h3>
+                    <div class="card-price">$19.95/User/Month</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Power Automate empowers users to create automated workflows without extensive coding knowledge.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Automated workflows</li>
+                            <li><i class="fas fa-check"></i> No coding required</li>
+                            <li><i class="fas fa-check"></i> Self-service automation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Subscribe Now</a>
+                </div>
+            </div>
+
+            <!-- Local Firewall In-house -->
+            <div class="service-card fade-in delay-2" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-fire-extinguisher card-icon"></i>
+                    <h3>Local Firewall In-house</h3>
+                    <div class="card-price">Custom Quote</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">On-premises firewall solution to protect your internal network from external threats and unauthorized access.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Network protection</li>
+                            <li><i class="fas fa-check"></i> Threat prevention</li>
+                            <li><i class="fas fa-check"></i> Access control</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Get Quote</a>
+                </div>
+            </div>
+
+            <!-- Client Entrance Access (Managing) -->
+            <div class="service-card fade-in delay-3" data-category="security">
+                <div class="card-header">
+                    <i class="fas fa-door-open card-icon"></i>
+                    <h3>Client Entrance Access (Managing)</h3>
+                    <div class="card-price">Custom Quote</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Secure management of client access points to ensure authorized entry and protect sensitive areas.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Access management</li>
+                            <li><i class="fas fa-check"></i> Secure entry points</li>
+                            <li><i class="fas fa-check"></i> Authorization control</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Get Quote</a>
+                </div>
+            </div>
+
+            <!-- Network Support (Extended hours) -->
+            <div class="service-card fade-in" data-category="support">
+                <div class="card-header">
+                    <i class="fas fa-wifi card-icon"></i>
+                    <h3>Network Support (Extended hours)</h3>
+                    <div class="card-price">Custom Quote</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Extended hours network support to ensure your business operations continue smoothly outside regular business hours.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Extended support hours</li>
+                            <li><i class="fas fa-check"></i> Network maintenance</li>
+                            <li><i class="fas fa-check"></i> Business continuity</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Get Quote</a>
+                </div>
+            </div>
+
+            <!-- Backup and Detector Recovery (Carrier) -->
+            <div class="service-card fade-in delay-1" data-category="backup">
+                <div class="card-header">
+                    <i class="fas fa-hdd card-icon"></i>
+                    <h3>Backup and Detector Recovery (Carrier)</h3>
+                    <div class="card-price">Custom Quote</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Comprehensive backup solution with advanced detection capabilities to ensure quick recovery from data loss incidents.</p>
+                    <div class="card-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Advanced detection</li>
+                            <li><i class="fas fa-check"></i> Quick recovery</li>
+                            <li><i class="fas fa-check"></i> Data protection</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-button">Get Quote</a>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>IT Support Depot</h3>
+                <p>Providing MSP Companies with Phenomenal IT Support services across all 50 states.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Our Products</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Cloud App Hosting</a></li>
+                    <li><a href="#">Cybersecurity Consulting</a></li>
+                    <li><a href="#">Mobile Security</a></li>
+                    <li><a href="#">Network Support</a></li>
+                    <li><a href="#">Email Security</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>Email: info@itsupportdepot.com</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Address: 123 Tech Street, Digital City, DC 12345</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 IT Support Depot. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Attempt to force playback for background video and surface errors to console
+        document.addEventListener('DOMContentLoaded', function() {
+            const bg = document.querySelector('.bg-video');
+            if (!bg) return;
+
+            // Make sure video is muted (required for autoplay in many browsers)
+            try { bg.muted = true; } catch (e) {}
+
+            // Try to play; some browsers return a promise
+            const playPromise = bg.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // playing
+                }).catch((err) => {
+                    // Autoplay blocked or other issue — log and try again with muted attribute
+                    console.warn('Background video play prevented:', err);
+                    try { bg.setAttribute('muted', ''); bg.muted = true; } catch (e) {}
+                    bg.play().catch(e => console.warn('Retry play failed:', e));
+                });
+            }
+
+            // If video has an error loading, show a console hint and reduce overlay to avoid full block
+            bg.addEventListener('error', function(e) {
+                console.warn('Background video failed to load. Check path or server configuration.', e);
+                const overlay = document.querySelector('.video-overlay');
+                if (overlay) overlay.style.background = 'rgba(10,42,67,0.06)';
+            });
+        });
+
+        // Add intersection observer for fade-in animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+
+            // Category filtering
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    const category = tab.getAttribute('data-category');
+                    
+                    // Show/hide service cards based on category
+                    serviceCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-box input');
+            
+            if (searchInput) {
+                searchInput.addEventListener('keyup', function() {
+                    const searchTerm = this.value.toLowerCase().trim();
+                    
+                    serviceCards.forEach(card => {
+                        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                        const description = card.querySelector('.card-description')?.textContent.toLowerCase() || '';
+                        const features = card.querySelector('.card-features')?.textContent.toLowerCase() || '';
+                        
+                        // Check if search term matches title, description, or features
+                        const matches = title.includes(searchTerm) || 
+                                       description.includes(searchTerm) || 
+                                       features.includes(searchTerm);
+                        
+                        if (searchTerm === '' || matches) {
+                            card.style.display = 'flex';
+                            card.style.opacity = '1';
+                        } else {
+                            card.style.display = 'none';
+                            card.style.opacity = '0';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
